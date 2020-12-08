@@ -78,27 +78,9 @@ void initPisteur(struct str_pisteur tabPisteur[],char mapAffich[HEIGHTAB][WIDTHT
         good=0;
         system("cls");
         //Afficher la map avec le pisteur
-        Affichage(mapAffich);
+        AffichageInit(mapAffich);
     }
 }
-
-/*void initMapAffBeginning(char tab[HEIGHTAB][WIDTHTAB]){
-    for(int i=0;i<HEIGHTAB;i++){
-        for(int j=0;j<WIDTHTAB;j++){
-            if((i==0)||(j==0)||(i==HEIGHTAB-1)||(j==WIDTHTAB-1)){
-                tab[i][j]='*';
-            }
-
-            if(i==0){
-                tab[i][j]=j+'0';
-            }else if(j==0){
-                tab[i][j]=i+'0';
-            }else{
-                tab[i][j]=' ';
-            }
-        }
-    }
-}*/
 
 //BUT:      Initialiser le tableau à afficher
 //ENTREE:   Le tableau
@@ -116,10 +98,26 @@ void initMapAff(char tab[HEIGHTAB][WIDTHTAB]){
     }
 }
 
+//BUT:      Initialiser les maps avec les traces
+//ENTREE:   Les tabs des traces
+//SORTIE:   Les tabs des traces initialisés
+void initMapTrace(int tab[HEIGHTAB][WIDTHTAB]){
+    for(int i=0;i<HEIGHTAB;i++){
+        for(int j=0;j<WIDTHTAB;j++){
+            //Poser le cadre
+            if((i==0)||(j==0)||(i==HEIGHTAB-1)||(j==WIDTHTAB-1)){
+                tab[i][j]=-1;
+            }else{
+                tab[i][j]=0;
+            }
+        }
+    }
+}
+
 //BUT:      Initialiser la variable du monstre
 //ENTREE:   Le monstre
 //SORTIE:   Le monstre initialiser
-void initMonstre(str_monstre *monstre,char tab[HEIGHTAB][WIDTHTAB]){
+void initMonstre(str_monstre *monstre,char tab[HEIGHTAB][WIDTHTAB],int mapTraceMonstre[HEIGHTAB][WIDTHTAB]){
     monstre->PV=4;
 
     srand(time(NULL));
@@ -132,19 +130,22 @@ void initMonstre(str_monstre *monstre,char tab[HEIGHTAB][WIDTHTAB]){
     int y=0;
     int good=0;
     do{
-        x = (rand() % (MaxX + 1 - Min)) + Min;
-        y = (rand() % (MaxY + 1 - Min)) + Min;
+        x=(rand()%(MaxX + 1 - Min))+Min;
+        y=(rand()%(MaxY + 1 - Min))+Min;
+        x=6;
+        y=6;
 
         good=1;
-        for(int i=-1;i<2;i++){
+        /*for(int i=-1;i<2;i++){
             for(int j=-1;j<2;j++){
                 if(tab[y+i][x+j]=='P'){
                     good=0;
                 }
             }
-        }
+        }*/
         if(good==1){
             tab[y][x]='M';
+            mapTraceMonstre[y][x]=16;
             monstre->pos.x=x;
             monstre->pos.y=y;
         }

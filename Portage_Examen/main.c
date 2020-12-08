@@ -5,10 +5,14 @@
 
 #include "phaseInit.h"
 #include "defineStruct.h"
+#include "phaseVision.h"
+#include "Affich.h"
 
 int main(int argc,char *argv[])
 {
+    //Déclaration des variables
     str_monstre monstre;
+    //str_monstre *pmonstre = &monstre;
     int nbPisteur=nombrePisteur();
     struct str_pisteur tabPisteur[nbPisteur];
 
@@ -17,12 +21,22 @@ int main(int argc,char *argv[])
 
     char mapAffichage[HEIGHTAB][WIDTHTAB];
 
+    //Initialisation
+    initMapTrace(mapTraceMonstre);
+    initMapTrace(mapTracePisteur);
+
     initMapAff(mapAffichage);
-    Affichage(mapAffichage);
+    AffichageInit(mapAffichage);
     initPisteur(tabPisteur,mapAffichage,nbPisteur);
 
-    initMonstre(&monstre,mapAffichage);
-    //Affichage(mapAffichage);
+    initMonstre(&monstre,mapAffichage,mapTraceMonstre);
+
+
+    //Phase Vision
+    phaseVision(tabPisteur,mapTraceMonstre,mapTracePisteur,mapAffichage,nbPisteur,&monstre);
+    printf("%d",monstre.PV);
+
+
 
     return 0;
 }

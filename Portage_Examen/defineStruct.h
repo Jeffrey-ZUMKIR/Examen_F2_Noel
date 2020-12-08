@@ -12,7 +12,7 @@ typedef struct coord{
 typedef struct str_pisteur{
     int vivant;
     coord pos;
-}pisteur;
+}str_pisteur;
 
 typedef struct str_monstre{
     int PV;
