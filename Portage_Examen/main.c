@@ -16,30 +16,42 @@ int main(int argc,char *argv[])
     int nbPisteur=nombrePisteur();
     struct str_pisteur tabPisteur[nbPisteur];
 
-    int mapTracePisteur[HEIGHTAB][WIDTHTAB];
     int mapTraceMonstre[HEIGHTAB][WIDTHTAB];
+    int tabTraceVue[HEIGHTAB][WIDTHTAB];//Les traces qui ont été vue de manière temporaire
 
     char mapAffichage[HEIGHTAB][WIDTHTAB];
 
     //Initialisation
     initMapTrace(mapTraceMonstre);
-    initMapTrace(mapTracePisteur);
+    for(int i=0;i<nbPisteur;i++){
+        initMapTrace(tabPisteur[i].mapTracePisteur);
+    }
+
+    initMapTrace(tabTraceVue);
 
     initMapAff(mapAffichage);
     AffichageInit(mapAffichage);
     initPisteur(tabPisteur,mapAffichage,nbPisteur);
 
     initMonstre(&monstre,mapAffichage,mapTraceMonstre);
-
-
+    system("cls");
+    //AffichageTrace(tabTraceVue,mapAffichage);
     //Phase Vision
-    /*phaseVision(tabPisteur,mapTraceMonstre,mapTracePisteur,mapAffichage,nbPisteur,&monstre);
-    printf("%d",monstre.PV);
-
+    phaseVision(tabPisteur,mapTraceMonstre,mapAffichage,nbPisteur,&monstre,tabTraceVue);
     //Pahse Déplacement
-    phaseDeplacement(tabPisteur,mapTracePisteur,nbPisteur,mapAffichage);
+
+
+    phaseDeplacement(tabPisteur,nbPisteur,mapAffichage,tabTraceVue);
+
+
+
     //AffichageInit(mapAffichage);
-    AffichageTrace(mapTracePisteur,mapAffichage);*/
+    //AffichageTrace(mapTracePisteur,mapAffichage);
     //printf("%d",tabPisteur[0].pos.y);
+
+    /*do{
+        initMapTrace(tabTraceVue);
+
+    }while;*/
     return 0;
 }

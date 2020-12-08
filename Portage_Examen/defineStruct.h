@@ -12,6 +12,7 @@ typedef struct coord{
 typedef struct str_pisteur{
     int vivant;
     coord pos;
+    int mapTracePisteur[HEIGHTAB][WIDTHTAB];
 }str_pisteur;
 
 typedef struct str_monstre{

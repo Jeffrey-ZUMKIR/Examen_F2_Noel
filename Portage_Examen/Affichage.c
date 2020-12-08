@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "phaseInit.h"
+#include "Affich.h"
 #include "defineStruct.h"
 
 //BUT:      Afficher le tableau
