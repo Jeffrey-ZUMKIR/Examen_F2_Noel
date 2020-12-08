@@ -33,10 +33,13 @@ int main(int argc,char *argv[])
 
 
     //Phase Vision
-    phaseVision(tabPisteur,mapTraceMonstre,mapTracePisteur,mapAffichage,nbPisteur,&monstre);
+    /*phaseVision(tabPisteur,mapTraceMonstre,mapTracePisteur,mapAffichage,nbPisteur,&monstre);
     printf("%d",monstre.PV);
 
-
-
+    //Pahse Déplacement
+    phaseDeplacement(tabPisteur,mapTracePisteur,nbPisteur,mapAffichage);
+    //AffichageInit(mapAffichage);
+    AffichageTrace(mapTracePisteur,mapAffichage);*/
+    //printf("%d",tabPisteur[0].pos.y);
     return 0;
 }

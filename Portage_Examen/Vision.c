@@ -16,7 +16,7 @@ void phaseVision(struct str_pisteur tabpisteur[], int tabTraceMonstre[HEIGHTAB][
                  char tabAff[HEIGHTAB][WIDTHTAB], int nbPisteur, str_monstre *monstre){
     //Répéter l'action de vue pour chaque pisteur
     for(int i=0;i<nbPisteur;i++){
-        doVision(tabpisteur[i],tabTraceMonstre,tabTracePisteur,tabAff,&monstre);
+        doVision(tabpisteur[i],tabTraceMonstre,tabTracePisteur,tabAff,monstre);
     }
     //monstre->PV=2;
 }
@@ -56,7 +56,7 @@ void doVision(str_pisteur pisteur, int tabTraceMonstre[HEIGHTAB][WIDTHTAB], int 
 
         //Si le monstre est là, enclencher le tir
         if(foundMonst==1){
-            Tirer(&monstre);
+            Tirer(monstre);
         }
 
         //Remettre le pisteur en défaut

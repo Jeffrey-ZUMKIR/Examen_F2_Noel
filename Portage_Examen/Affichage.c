@@ -10,7 +10,22 @@
 void AffichageInit(char tab[HEIGHTAB][WIDTHTAB]){
     for(int i=0;i<HEIGHTAB;i++){
         for(int j=0;j<WIDTHTAB;j++){
-            printf("%c ",tab[i][j]);
+            if(i==0 && j!=0 && j!=WIDTHTAB-1){
+                if(j<10){
+                    printf("%d ",j);
+                }else{
+                    printf("%d",j);
+                }
+            }else if(j==0 && i!=0 && i!=HEIGHTAB-1){
+                if(i<10){
+                    printf("%d ",i);
+                }else{
+                    printf("%d",i);
+                }
+            }else{
+                printf("%c ",tab[i][j]);
+            }
+
         }
         printf("\n");
     }
