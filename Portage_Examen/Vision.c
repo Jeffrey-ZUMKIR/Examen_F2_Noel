@@ -102,6 +102,7 @@ void Tirer(str_monstre *monstre){
         if(shoot<=40){
             printf("Toucher!\n");
             monstre->PV-=1;
+            monstre->saignement=4;
         }else{
             printf("Louper!\n");
         }

@@ -18,6 +18,7 @@ typedef struct str_pisteur{
 typedef struct str_monstre{
     int PV;
     coord pos;
+    int saignement;
 }str_monstre;
 
 

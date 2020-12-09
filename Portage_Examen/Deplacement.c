@@ -5,111 +5,134 @@
 #include "Affich.h"
 #include "phaseDeplacement.h"
 
-
+//BUT:      Enclencher la déplacement de chaque pisteur
+//ENTREE:   La liste des pisteurs, le nombre de pisteur, la map à afficher, les traces appercus par les pisteurs
+//SORTIE:   Phase de déplacement de pisteur terminé
 void phaseDeplacement(str_pisteur tabPisteur[],int nbPisteur, char mapAffiche[HEIGHTAB][WIDTHTAB],int tabTraceVue[HEIGHTAB][WIDTHTAB]){
 
     for(int i=0;i<nbPisteur;i++){
-        mapAffiche[tabPisteur[i].pos.y][tabPisteur[i].pos.x]='?';
-        AffichageTrace(tabTraceVue,mapAffiche);
-        doDeplacement(&tabPisteur[i],mapAffiche);
-        AffichageTrace(tabTraceVue,mapAffiche);
-        system("pause");
-        system("cls");
+        if(tabPisteur[i].vivant==1){
+            //Indiquer quel pisteur veut se déplacer
+            mapAffiche[tabPisteur[i].pos.y][tabPisteur[i].pos.x]='?';
+            //Afficher la map
+            AffichageTrace(tabTraceVue,mapAffiche);
+            //Déplacer le pisteur
+            doDeplacement(&tabPisteur[i],mapAffiche);
+            //Afficher la modification
+            AffichageTrace(tabTraceVue,mapAffiche);
+            system("pause");
+            system("cls");
+        }
     }
 
 }
 
-
+//BUT:      Faire déplacer un pisteur
+//ENTREE:   Le pisteur, la map à afficher
+//SORTIE:   Le pisteur déplacé
 void doDeplacement(str_pisteur *pisteur, char mapAffiche[HEIGHTAB][WIDTHTAB]){
-    int depl=0;
-    int sens=0;
-    int good=0;
+    int depl=0;//Nombre de case déplacé
+    int sens=0;//Sens pris
+    int good=0;//Booleen de vérification
 
+    int xtemp;//Coordonné x temporaire
+    int ytemp;//Coordonné y temporaire
 
-    printf("De combien de case voulez-vous vous deplacer? (0 a 4)\n");
+    //Faire tant que la zone ou se déplacer est déjà utiliser par un pisteur
     do{
-        scanf("%d",&depl);
-        fflush(stdin);
-        if(depl>=0 && depl<=4){
-            good=1;
-        }else{
-            printf("Mauvais chiffre.\n");
-        }
-    }while(good==0);
+        xtemp=pisteur->pos.x;//Donner les coordonnées aux variables temporaires
+        ytemp=pisteur->pos.y;
 
-    if(depl!=0){
-        printf("Dans quel sens? (1=haut, 2=droite, 3=bas, 4=gauche)\n");
-        good=0;
-        do{
-            scanf("%d",&sens);
+        printf("De combien de case voulez-vous vous deplacer? (0 a 4)\n");
+        do{//Faire tant que le nombre de pas reçu est plus petit que 0 ou plus grand que 4
+            scanf("%d",&depl);
             fflush(stdin);
-            if(sens>=1 && sens<=4){
+            if(depl>=0 && depl<=4){
                 good=1;
             }else{
                 printf("Mauvais chiffre.\n");
             }
         }while(good==0);
 
+        //Si pas de déplacement, pas besoin de savoir le sens de déplacement
+        if(depl!=0){
+            printf("Dans quel sens? (1=haut, 2=droite, 3=bas, 4=gauche)\n");
+            good=0;
+            do{//Faire tant que le nombre pour le sens donner est plus petit que 1 ou plus grand que 4
+                scanf("%d",&sens);
+                fflush(stdin);
+                if(sens>=1 && sens<=4){
+                    good=1;
+                }else{
+                    printf("Mauvais chiffre.\n");
+                }
+            }while(good==0);
 
-        mapAffiche[pisteur->pos.y][pisteur->pos.x]=' ';
-        switch(sens) {
-        case 1:
-            if(pisteur->pos.y-depl<=0){
-                mapAffiche[1][pisteur->pos.x]='P';
-                depl=pisteur->pos.y-1;
-                pisteur->pos.y=1;
+            good=0;
+            mapAffiche[pisteur->pos.y][pisteur->pos.x]=' ';
+            //Donne une nouvelle posisition en fonction du sens
+            switch(sens) {
+            case 1:
+                //Si le déplacement faire sortir le pisteur, retirer autant pour que le pisteur reste dans le cadre
+                if(pisteur->pos.y-depl<=0){
+                    depl=ytemp-1;
+                    ytemp=1;
+                }else{
+                    ytemp-=depl;
+                }
+                break;
+            case 2:
+                if(pisteur->pos.x+depl>=WIDTHTAB){
+                    depl=WIDTHTAB-1-xtemp;
+                    xtemp=WIDTHTAB-1;
 
-            }else{
-                mapAffiche[pisteur->pos.y-depl][pisteur->pos.x]='P';
-                pisteur->pos.y-=depl;
+                }else{
+                    xtemp+=depl;
+                }
+                break;
+            case 3:
+                if(pisteur->pos.y+depl>=HEIGHTAB){
+                    depl=HEIGHTAB-1-ytemp;
+                    ytemp=HEIGHTAB-1;
+
+                }else{
+                    ytemp+=depl;
+                }
+                break;
+            case 4:
+                if(pisteur->pos.x-depl<=0){
+                    depl=xtemp-1;
+                    xtemp=1;
+
+                }else{
+                    xtemp-=depl;
+                }
+                break;
             }
-            break;
-        case 2:
-            if(pisteur->pos.x+depl>=WIDTHTAB){
-                mapAffiche[pisteur->pos.y][WIDTHTAB-1]='P';
-                depl=WIDTHTAB-1-pisteur->pos.x;
-                pisteur->pos.x=WIDTHTAB-1;
-
-            }else{
-                mapAffiche[pisteur->pos.y][pisteur->pos.x+depl]='P';
-                pisteur->pos.x+=depl;
+            //Vérification si un autre pisteur se trouve déjà sur cette case
+            if(mapAffiche[ytemp][xtemp]!='P'){
+                good=1;
             }
-            break;
-        case 3:
-            if(pisteur->pos.y+depl>=HEIGHTAB){
-                mapAffiche[HEIGHTAB-1][pisteur->pos.x]='P';
-                depl=HEIGHTAB-1-pisteur->pos.y;
-                pisteur->pos.y=HEIGHTAB-1;
-
-            }else{
-                mapAffiche[pisteur->pos.y+depl][pisteur->pos.x]='P';
-                pisteur->pos.y+=depl;
-            }
-            break;
-        case 4:
-            if(pisteur->pos.x-depl<=0){
-                mapAffiche[pisteur->pos.y][1]='P';
-                depl=pisteur->pos.x-1;
-                pisteur->pos.x=1;
-
-            }else{
-                mapAffiche[pisteur->pos.y][pisteur->pos.x-depl]='P';
-                pisteur->pos.x-=depl;
-            }
-            break;
         }
-        printf("depl %d", depl);
-        addTrace(pisteur,sens,depl);
+    }while(good==0);
+    //Pose le joueur au nouvel emplacement
+    mapAffiche[ytemp][xtemp]='P';
+    //Donne les nouvelles coordonnées
+    pisteur->pos.x=xtemp;
+    pisteur->pos.y=ytemp;
 
-    }
+    //Ajoute les traces laissés par le pisteur lors de son déplacement
+    addTrace(pisteur,sens,depl);
 
     system("cls");
 }
 
-
+//BUT:      Ajouter les traces de pas du pisteur derrière lui
+//ENTREE:   Le pisteur, le sens et le déplacement
+//SORTIE:   Ajout de straces de pas
 void addTrace(str_pisteur *pisteur, int sens, int depl){
-    //tabTrace[1][1]=3;
     int i=0;
+    //Ajout de l'anciennete sur les anciennes trace pour aller avec les nouvelles
     for(i=0;i<HEIGHTAB;i++){
         for(int j=0;j<WIDTHTAB;j++){
             if(pisteur->mapTracePisteur[i][j]>0){
@@ -117,12 +140,11 @@ void addTrace(str_pisteur *pisteur, int sens, int depl){
             }
         }
     }
-    printf("Le depl %d", depl);
+    //Ajout des traces en fonction du sens
     switch(sens){
     case 1:
         for(i=1;i<depl+1;i++){
             pisteur->mapTracePisteur[pisteur->pos.y+i][pisteur->pos.x]=i;
-            //printf("valeur :%d", tabTrace[pisteur.pos.y+i][pisteur.pos.x]);
         }
         break;
     case 2:
@@ -141,12 +163,5 @@ void addTrace(str_pisteur *pisteur, int sens, int depl){
         }
         break;
     }
-    for(int i=0;i<HEIGHTAB;i++){
-        for(int j=0;j<WIDTHTAB;j++){
-            printf("%d",pisteur->mapTracePisteur[i][j]);
-        }
-        printf("\n");
-    }
-    system("pause");
 
 }

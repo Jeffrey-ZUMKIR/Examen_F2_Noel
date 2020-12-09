@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1607453315 source:d:\home\documents\ludus f2\examen\noel\examen_f2_noel\portage_examen\main.c
+1607538737 source:d:\home\documents\ludus f2\examen\noel\examen_f2_noel\portage_examen\main.c
 	<stdio.h>
 	<stdlib.h>
 	<SDL2/SDL.h>
@@ -7,7 +7,10 @@
 	"phaseInit.h"
 	"defineStruct.h"
 	"phaseVision.h"
+	"phaseDeplacement.h"
 	"Affich.h"
+	"phaseMonstre.h"
+	"trace.h"
 
 1583890769 d:\home\documents\ludus f2\algo\sdl2-2.0.12\x86_64-w64-mingw32\include\sdl2\sdl.h
 	"SDL_main.h"
@@ -372,16 +375,17 @@
 1607424728 d:\home\documents\ludus f2\examen\noel\examen_f2_noel\portage_examen\phaseinit.h
 	"defineStruct.h"
 
-1607452144 d:\home\documents\ludus f2\examen\noel\examen_f2_noel\portage_examen\definestruct.h
+1607537318 d:\home\documents\ludus f2\examen\noel\examen_f2_noel\portage_examen\definestruct.h
 
-1607433958 source:d:\home\documents\ludus f2\examen\noel\examen_f2_noel\portage_examen\initialisation.c
+1607538757 source:d:\home\documents\ludus f2\examen\noel\examen_f2_noel\portage_examen\initialisation.c
 	<stdio.h>
 	<stdlib.h>
 	<time.h>
 	"phaseInit.h"
 	"defineStruct.h"
+	"Affich.h"
 
-1607453439 source:d:\home\documents\ludus f2\examen\noel\examen_f2_noel\portage_examen\affichage.c
+1607538204 source:d:\home\documents\ludus f2\examen\noel\examen_f2_noel\portage_examen\affichage.c
 	<stdio.h>
 	<stdlib.h>
 	"Affich.h"
@@ -390,7 +394,7 @@
 1607453315 d:\home\documents\ludus f2\examen\noel\examen_f2_noel\portage_examen\phasevision.h
 	"defineStruct.h"
 
-1607453315 source:d:\home\documents\ludus f2\examen\noel\examen_f2_noel\portage_examen\vision.c
+1607538204 source:d:\home\documents\ludus f2\examen\noel\examen_f2_noel\portage_examen\vision.c
 	<stdio.h>
 	<stdlib.h>
 	<ctype.h>
@@ -401,7 +405,7 @@
 1607424728 d:\home\documents\ludus f2\examen\noel\examen_f2_noel\portage_examen\affich.h
 	"defineStruct.h"
 
-1607453439 source:d:\home\documents\ludus f2\examen\noel\examen_f2_noel\portage_examen\deplacement.c
+1607528223 source:d:\home\documents\ludus f2\examen\noel\examen_f2_noel\portage_examen\deplacement.c
 	<stdio.h>
 	<stdlib.h>
 	"defineStruct.h"
@@ -410,4 +414,24 @@
 
 1607453315 d:\home\documents\ludus f2\examen\noel\examen_f2_noel\portage_examen\phasedeplacement.h
 	"defineStruct.h"
+
+1607538204 d:\home\documents\ludus f2\examen\noel\examen_f2_noel\portage_examen\phasemonstre.h
+	"defineStruct.h"
+
+1607538622 source:d:\home\documents\ludus f2\examen\noel\examen_f2_noel\portage_examen\monstre.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	"defineStruct.h"
+	"phaseMonstre.h"
+	"trace.h"
+
+1607529296 d:\home\documents\ludus f2\examen\noel\examen_f2_noel\portage_examen\trace.h
+	"defineStruct.h"
+
+1607529296 source:d:\home\documents\ludus f2\examen\noel\examen_f2_noel\portage_examen\tracec.c
+	<stdio.h>
+	<stdlib.h>
+	"defineStruct.h"
+	"trace.h"
 

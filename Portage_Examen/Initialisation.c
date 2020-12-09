@@ -4,6 +4,7 @@
 
 #include "phaseInit.h"
 #include "defineStruct.h"
+#include "Affich.h"
 
 #define NBMAXPIS 10
 #define NBMINPIS 1
@@ -119,6 +120,7 @@ void initMapTrace(int tab[HEIGHTAB][WIDTHTAB]){
 //SORTIE:   Le monstre initialiser
 void initMonstre(str_monstre *monstre,char tab[HEIGHTAB][WIDTHTAB],int mapTraceMonstre[HEIGHTAB][WIDTHTAB]){
     monstre->PV=4;
+    monstre->saignement=0;
 
     srand(time(NULL));
 
@@ -132,20 +134,20 @@ void initMonstre(str_monstre *monstre,char tab[HEIGHTAB][WIDTHTAB],int mapTraceM
     do{
         x=(rand()%(MaxX + 1 - Min))+Min;
         y=(rand()%(MaxY + 1 - Min))+Min;
-        x=6;
-        y=6;
+        //x=6;
+        //y=6;
 
         good=1;
-        /*for(int i=-1;i<2;i++){
+        for(int i=-1;i<2;i++){
             for(int j=-1;j<2;j++){
                 if(tab[y+i][x+j]=='P'){
                     good=0;
                 }
             }
-        }*/
+        }
         if(good==1){
             tab[y][x]='M';
-            mapTraceMonstre[y][x]=16;
+            mapTraceMonstre[y][x]=17;
             monstre->pos.x=x;
             monstre->pos.y=y;
         }

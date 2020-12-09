@@ -6,7 +6,10 @@
 #include "phaseInit.h"
 #include "defineStruct.h"
 #include "phaseVision.h"
+#include "phaseDeplacement.h"
 #include "Affich.h"
+#include "phaseMonstre.h"
+#include "trace.h"
 
 int main(int argc,char *argv[])
 {
@@ -37,21 +40,35 @@ int main(int argc,char *argv[])
     system("cls");
     //AffichageTrace(tabTraceVue,mapAffichage);
     //Phase Vision
-    phaseVision(tabPisteur,mapTraceMonstre,mapAffichage,nbPisteur,&monstre,tabTraceVue);
-    //Pahse Déplacement
+    //phaseVision(tabPisteur,mapTraceMonstre,mapAffichage,nbPisteur,&monstre,tabTraceVue);
+    //Phase Déplacement
 
 
-    phaseDeplacement(tabPisteur,nbPisteur,mapAffichage,tabTraceVue);
+    //phaseDeplacement(tabPisteur,nbPisteur,mapAffichage,tabTraceVue);
+
+    //Phase monstre
+
 
 
 
     //AffichageInit(mapAffichage);
     //AffichageTrace(mapTracePisteur,mapAffichage);
     //printf("%d",tabPisteur[0].pos.y);
+    int good=0;
+    do{
+        deleteTrace(mapTraceMonstre);
 
-    /*do{
+        phaseVision(tabPisteur,mapTraceMonstre,mapAffichage,nbPisteur,&monstre,tabTraceVue);
+
+        phaseDeplacement(tabPisteur,nbPisteur,mapAffichage,tabTraceVue);
         initMapTrace(tabTraceVue);
-
-    }while;*/
+        phaseMonstre(&monstre,mapTraceMonstre,tabPisteur,mapAffichage,nbPisteur,tabTraceVue);
+        //printf("x: %d ",monstre.pos.x);
+        //printf("y: %d\n",monstre.pos.y);
+        //AffichageTrace(tabPisteur[0].mapTracePisteur,mapAffichage);
+        //AffichageTrace(mapTraceMonstre,mapAffichage);
+        system("pause");
+        system("cls");
+    }while(good==0);
     return 0;
 }

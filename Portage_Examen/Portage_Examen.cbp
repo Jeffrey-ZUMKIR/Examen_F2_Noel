@@ -41,17 +41,26 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="Affich.h" />
 		<Unit filename="Affichage.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="Deplacement.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="Initialisation.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Vision.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="defineStruct.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="phaseDeplacement.h" />
 		<Unit filename="phaseInit.h" />
+		<Unit filename="phaseVision.h" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>
