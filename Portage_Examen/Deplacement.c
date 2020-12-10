@@ -8,22 +8,24 @@
 //BUT:      Enclencher la déplacement de chaque pisteur
 //ENTREE:   La liste des pisteurs, le nombre de pisteur, la map à afficher, les traces appercus par les pisteurs
 //SORTIE:   Phase de déplacement de pisteur terminé
-void phaseDeplacement(str_pisteur tabPisteur[],int nbPisteur, char mapAffiche[HEIGHTAB][WIDTHTAB],int tabTraceVue[HEIGHTAB][WIDTHTAB]){
-
-    for(int i=0;i<nbPisteur;i++){
-        if(tabPisteur[i].vivant==1){
-            //Indiquer quel pisteur veut se déplacer
-            mapAffiche[tabPisteur[i].pos.y][tabPisteur[i].pos.x]='?';
-            //Afficher la map
-            AffichageTrace(tabTraceVue,mapAffiche);
-            //Déplacer le pisteur
-            doDeplacement(&tabPisteur[i],mapAffiche);
-            //Afficher la modification
-            AffichageTrace(tabTraceVue,mapAffiche);
-            system("pause");
-            system("cls");
+void phaseDeplacement(str_pisteur tabPisteur[],int nbPisteur, char mapAffiche[HEIGHTAB][WIDTHTAB],int tabTraceVue[HEIGHTAB][WIDTHTAB],str_monstre monstre){
+    if(monstre.PV>0){
+        for(int i=0;i<nbPisteur;i++){
+            if(tabPisteur[i].vivant==1){
+                //Indiquer quel pisteur veut se déplacer
+                mapAffiche[tabPisteur[i].pos.y][tabPisteur[i].pos.x]='?';
+                //Afficher la map
+                AffichageTrace(tabTraceVue,mapAffiche);
+                //Déplacer le pisteur
+                doDeplacement(&tabPisteur[i],mapAffiche);
+                //Afficher la modification
+                AffichageTrace(tabTraceVue,mapAffiche);
+                system("pause");
+                system("cls");
+            }
         }
     }
+
 
 }
 
@@ -57,6 +59,16 @@ void doDeplacement(str_pisteur *pisteur, char mapAffiche[HEIGHTAB][WIDTHTAB]){
         //Si pas de déplacement, pas besoin de savoir le sens de déplacement
         if(depl!=0){
             printf("Dans quel sens? (1=haut, 2=droite, 3=bas, 4=gauche)\n");
+            //Aide visuel pour le sens
+            printf("%c ",' ');
+            printf("%d ",1);
+            printf("%c\n",' ');
+            printf("%d ",4);
+            printf("%c ",'P');
+            printf("%d\n",2);
+            printf("%c ",' ');
+            printf("%d ",3);
+            printf("%c\n",' ');
             good=0;
             do{//Faire tant que le nombre pour le sens donner est plus petit que 1 ou plus grand que 4
                 scanf("%d",&sens);

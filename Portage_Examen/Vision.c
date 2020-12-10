@@ -53,6 +53,17 @@ void doVision(str_pisteur pisteur, int tabTraceMonstre[HEIGHTAB][WIDTHTAB], char
             }
             printf("\n");
         }
+        //Aide pour comprendre de quel zone nous parlons
+        printf("%d ",1);
+        printf("%d ",2);
+        printf("%d\n",3);
+        printf("%d ",4);
+        printf("%c ",'P');
+        printf("%d\n",6);
+        printf("%d ",7);
+        printf("%d ",8);
+        printf("%d\n",9);
+
         AffichageTrace(tabTraceVue,tabAffiche);
 
         //Si le monstre est là, enclencher le tir
@@ -102,6 +113,7 @@ void Tirer(str_monstre *monstre){
         if(shoot<=40){
             printf("Toucher!\n");
             monstre->PV-=1;
+            printf("Il ne lui reste plus que %d PV!\n",monstre->PV);
             monstre->saignement=4;
         }else{
             printf("Louper!\n");

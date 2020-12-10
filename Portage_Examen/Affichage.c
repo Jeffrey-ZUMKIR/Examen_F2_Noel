@@ -47,6 +47,8 @@ void AffichageTrace(int tabTrace[HEIGHTAB][WIDTHTAB],char tabAff[HEIGHTAB][WIDTH
                 printf("%c ",'?');
             }else if(tabTrace[i][j]=='&'){
                 printf("%c ",'&');
+            }else if(tabTrace[i][j]==16){
+                printf("%c ",'M');
             }else if(tabTrace[i][j]>0){
                 if(tabTrace[i][j]<10){
                     printf("%d ",tabTrace[i][j]);
