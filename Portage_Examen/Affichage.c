@@ -10,11 +10,7 @@
 //ENTREE:   Le tableau
 //SORTIE:   Le tableau affiché
 void AffichageInit(char tab[HEIGHTAB][WIDTHTAB]){
-    /*//if(pRenderer){
-        //Set Color
-        //SDL_SetRenderDrawColor(pRenderer,205,92,92,SDL_ALPHA_OPAQUE);
-        //Clear Render
-        //SDL_RenderClear(pRenderer);
+
         int i=0;
         int j=0;
 
@@ -43,7 +39,7 @@ void AffichageInit(char tab[HEIGHTAB][WIDTHTAB]){
             }
             printf("\n");
         }
-    //}*/
+
 
 }
 

@@ -80,8 +80,8 @@ void doVision(str_pisteur pisteur, int tabTraceMonstre[HEIGHTAB][WIDTHTAB], char
         //monstre->PV=2;
         //printf("PV du monstre%d",monstre.PV);
 
-        system("pause");
-        system("cls");
+
+
 
     }
 }

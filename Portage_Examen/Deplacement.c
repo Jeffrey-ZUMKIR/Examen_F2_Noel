@@ -95,18 +95,18 @@ void doDeplacement(str_pisteur *pisteur, char mapAffiche[HEIGHTAB][WIDTHTAB]){
                 }
                 break;
             case 2:
-                if(pisteur->pos.x+depl>=WIDTHTAB){
-                    depl=WIDTHTAB-1-xtemp;
-                    xtemp=WIDTHTAB-1;
+                if(pisteur->pos.x+depl>=WIDTHTAB-1){
+                    depl=WIDTHTAB-2-xtemp;
+                    xtemp=WIDTHTAB-2;
 
                 }else{
                     xtemp+=depl;
                 }
                 break;
             case 3:
-                if(pisteur->pos.y+depl>=HEIGHTAB){
-                    depl=HEIGHTAB-1-ytemp;
-                    ytemp=HEIGHTAB-1;
+                if(pisteur->pos.y+depl>=HEIGHTAB-1){
+                    depl=HEIGHTAB-2-ytemp;
+                    ytemp=HEIGHTAB-2;
 
                 }else{
                     ytemp+=depl;
