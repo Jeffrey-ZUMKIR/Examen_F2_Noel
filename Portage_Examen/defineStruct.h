@@ -47,9 +47,10 @@ typedef enum gameState{
 
 }gameState;
 
-//Etats controller
+//Etats phase
 typedef enum phase{
 
+        init,
         vision,
         deplacement,
         none

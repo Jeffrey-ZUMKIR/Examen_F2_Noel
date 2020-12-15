@@ -27,6 +27,7 @@ int main(int argc,char *argv[])
 
     listTexture myTexture;
 
+    tRender.pWindow=NULL;
     tRender.pWindow=CreateWindow("La traque de Monk C",475,50,WIDTHTAB*sizeImage,HEIGHTAB*sizeImage,SDL_WINDOW_SHOWN,tRender.pWindow);
     tRender.pRenderer=CreateRenderer(tRender.pWindow,-1,SDL_RENDERER_PRESENTVSYNC);
 
@@ -75,13 +76,11 @@ int main(int argc,char *argv[])
         SDL_RenderClear(tRender.pRenderer);
 
         //Diminue la fraicheur des traces
-        deleteTrace(mapTraceMonstre);
+        deleteTrace(mapTraceMonstre);//Une seul fois
         //Phase Vision
         phaseVision(tabPisteur,mapTraceMonstre,mapAffichage,nbPisteur,&monstre,tabTraceVue);//Modification de l'image+ajout trace
 
-        //Set modification affichage
-        AffichImgSDL(tRender.pRenderer,myTexture,tabTraceVue,mapAffichage);
-        SDL_RenderPresent(tRender.pRenderer);
+
 
         //Phase Deplacement
         phaseDeplacement(tabPisteur,nbPisteur,mapAffichage,tabTraceVue,monstre);//Clear plus nouvelle emplacement
@@ -92,16 +91,22 @@ int main(int argc,char *argv[])
         //Vérification de la condition de victoire
         CheckEndGame(monstre,tabPisteur,&good,nbPisteur);//clear + ajout pisteur si vivant
 
+        //Set modification affichage
+        AffichImgSDL(tRender.pRenderer,myTexture,tabTraceVue,mapAffichage);
+        SDL_RenderPresent(tRender.pRenderer);
 
         system("pause");
         //Clear screen
         system("cls");
 
+        if(good!=0){
+            state=stop;
+        }
 
     //Affichage de fin
 
-    //state=stop;
     }while(state==play);
+
     if(good==1){
         printf("Vous avez terrasse le monstre!");
     }else if(good==2){
