@@ -16,6 +16,8 @@ void phaseMonstre(str_monstre *monstre, int tabTraceM[HEIGHTAB][WIDTHTAB], struc
     int trace=0;
     int traceAutour=0;
 
+    int i=0;
+
     //Ne faire sa phase seulement si il a encore des vies
     if(monstre->PV>0){
         //Vérifie d'abord si un pisteur se trouve sur les cases juste à coté de lui
@@ -33,7 +35,7 @@ void phaseMonstre(str_monstre *monstre, int tabTraceM[HEIGHTAB][WIDTHTAB], struc
             //Retire le pisteur présent sur la mapAffiche
             mapAffiche[ygoto][xgoto]=' ';
             //Le pisteur présent sur cette case passe sa vie à 0
-            for(int i=0;i<nbPisteur;i++){
+            for(i=0;i<nbPisteur;i++){
                 if(tabPisteur[i].pos.x==xgoto && tabPisteur[i].pos.y==ygoto){
                     printf("Le monstre a devore le pisteur numero %d!\n",i+1);
                     tabPisteur[i].vivant=0;
@@ -89,7 +91,7 @@ void phaseMonstre(str_monstre *monstre, int tabTraceM[HEIGHTAB][WIDTHTAB], struc
                 //Retire le pisteur présent sur la mapAffiche
                 mapAffiche[ygoto][xgoto]=' ';
                 //Le pisteur présent sur cette case passe sa vie à 0
-                for(int i=0;i<nbPisteur;i++){
+                for(i=0;i<nbPisteur;i++){
                     if(tabPisteur[i].pos.x==xgoto && tabPisteur[i].pos.y==ygoto){
                         printf("Le monstre a devore le pisteur numero %d!\n",i);
                         tabPisteur[i].vivant=0;
@@ -142,8 +144,9 @@ int checkAutour(str_monstre *monstre, char mapAffiche[HEIGHTAB][WIDTHTAB], int *
 //SORTIE:   La trace la plus récente surlaquel le monstre se trouve
 int checkTraceActuelle(str_monstre *monstre, struct str_pisteur tabPisteur[], int nbPisteur){
     int onTrace=0;
+    int i=0;
     //On récupère la trace la plus récente sur laquel il se trouve
-    for(int i=0;i<nbPisteur;i++){
+    for(i=0;i<nbPisteur;i++){
         if(tabPisteur[i].vivant==1){
             if(tabPisteur[i].mapTracePisteur[monstre->pos.y][monstre->pos.x]!=0){
                 if(onTrace==0){
@@ -164,8 +167,10 @@ int checkTraceAutour(str_monstre *monstre, struct str_pisteur tabPisteur[], int 
     int xtemp=0;
     int ytemp=0;
 
+    int i=0;
+
     //Vérifie si les traces autour de lui sont plus récentes que d'autre
-    for(int i=0;i<nbPisteur;i++){
+    for(i=0;i<nbPisteur;i++){
         if(tabPisteur[i].vivant==1){
             if(tabPisteur[i].mapTracePisteur[monstre->pos.y-1][monstre->pos.x]>0 && tabPisteur[i].mapTracePisteur[monstre->pos.y-1][monstre->pos.x]<traceAct){
                 traceAct=tabPisteur[i].mapTracePisteur[monstre->pos.y-1][monstre->pos.x];

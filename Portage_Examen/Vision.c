@@ -29,13 +29,16 @@ void doVision(str_pisteur pisteur, int tabTraceMonstre[HEIGHTAB][WIDTHTAB], char
         int nb=1;
         int foundMonst=0;
 
+        int i=0;
+        int j=0;
+
         //Indiquer quel pisteur voie
         tabAffiche[y][x]='!';
         //AffichageTrace(tabTraceVue,tabAff);
 
         //Vérification de chaque case autour du pisteur
-        for(int i=-1;i<2;i++){
-            for(int j=-1;j<2;j++){
+        for(i=-1;i<2;i++){
+            for(j=-1;j<2;j++){
                 //Détection si le monstre est là
                 if(tabTraceMonstre[y+i][x+j]==16){
                     printf("Le monstre se trouve en case numero %d! ",nb);

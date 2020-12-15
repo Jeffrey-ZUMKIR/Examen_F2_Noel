@@ -1,8 +1,11 @@
 #ifndef DEFINESTRUCT_H_INCLUDED
+#include <SDL2/SDL.h>
 #define DEFINESTRUCT_H_INCLUDED
 
-#define WIDTHTAB 30
-#define HEIGHTAB 15
+#define WIDTHTAB 31
+#define HEIGHTAB 16
+
+#define sizeImage 25
 
 typedef struct coord{
     int x;
@@ -20,6 +23,38 @@ typedef struct str_monstre{
     coord pos;
     int saignement;
 }str_monstre;
+
+typedef struct listTexture{
+    SDL_Texture *pTexturePisteur;
+    SDL_Texture *pTextureMonstre;
+    SDL_Texture *pTextureTrace;
+    SDL_Texture *pTextureSang;
+}listTexture;
+
+typedef struct renderer{
+
+    SDL_Window *pWindow;
+    SDL_Renderer *pRenderer;
+
+}renderer;
+
+//Etats jeu
+typedef enum gameState{
+
+    play,
+    stop,
+    pause
+
+}gameState;
+
+//Etats controller
+typedef enum phase{
+
+        vision,
+        deplacement,
+        none
+
+}phase;
 
 
 

@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 
 #include "phaseInit.h"
 #include "defineStruct.h"
@@ -38,8 +40,9 @@ void initPisteur(struct str_pisteur tabPisteur[],char mapAffich[HEIGHTAB][WIDTHT
     int ok=0;
     int x=0;
     int y=0;
+    int i=0;
     //Initialiser chaque pisteur
-    for(int i=0;i<nbPisteur;i++){
+    for(i=0;i<nbPisteur;i++){
         tabPisteur[i].vivant=1;
         //demander les coordonnes du pisteur
         printf("Ou souhaitez-vous placer le pisteur numero %d ?\n",i+1);
@@ -87,8 +90,10 @@ void initPisteur(struct str_pisteur tabPisteur[],char mapAffich[HEIGHTAB][WIDTHT
 //ENTREE:   Le tableau
 //SORTIE:   Le tableau initialiser
 void initMapAff(char tab[HEIGHTAB][WIDTHTAB]){
-    for(int i=0;i<HEIGHTAB;i++){
-        for(int j=0;j<WIDTHTAB;j++){
+    int i=0;
+    int j=0;
+    for(i=0;i<HEIGHTAB;i++){
+        for(j=0;j<WIDTHTAB;j++){
             //Poser le cadre
             if((i==0)||(j==0)||(i==HEIGHTAB-1)||(j==WIDTHTAB-1)){
                 tab[i][j]='*';
@@ -103,8 +108,10 @@ void initMapAff(char tab[HEIGHTAB][WIDTHTAB]){
 //ENTREE:   Les tabs des traces
 //SORTIE:   Les tabs des traces initialisés
 void initMapTrace(int tab[HEIGHTAB][WIDTHTAB]){
-    for(int i=0;i<HEIGHTAB;i++){
-        for(int j=0;j<WIDTHTAB;j++){
+    int i=0;
+    int j=0;
+    for(i=0;i<HEIGHTAB;i++){
+        for(j=0;j<WIDTHTAB;j++){
             //Poser le cadre
             if((i==0)||(j==0)||(i==HEIGHTAB-1)||(j==WIDTHTAB-1)){
                 tab[i][j]=-1;
@@ -152,4 +159,103 @@ void initMonstre(str_monstre *monstre,char tab[HEIGHTAB][WIDTHTAB],int mapTraceM
             monstre->pos.y=y;
         }
     }while(good==0);
+}
+
+//BUT:      Créer une fenêtre
+//ENTREE:   Le titre, la position x et y, la hauteur, la largeur et le drapeau
+//SORTIE:   Une fenêtre
+SDL_Window *CreateWindow(const char* title, int x, int y, int w, int h, Uint32 windowFlag,SDL_Window *pWindow){
+    //SDL_Window *pWindow;
+    if(SDL_Init(SDL_INIT_EVERYTHING)!=0){
+        //Afficher les erreurs arrivés
+        SDL_Log("Unbale to initialize SDL: %s", SDL_GetError());
+        //Détruire toute les données relatives à la SDL
+        SDL_Quit();
+        //Sortir du programme
+        //return 1;
+    }else{
+        //Création d'une fenêtre
+        pWindow=SDL_CreateWindow(title,x,y,w,h,windowFlag);
+    }
+    return pWindow;
+}
+
+//BUT:      Créer un renderer
+//ENTREE:   La fenêtre, un index et un drapeau
+//SORTIE:   Un renderer
+SDL_Renderer *CreateRenderer(SDL_Window *pWindow, int index, Uint32 flags){
+    SDL_Renderer *pRenderer=NULL;
+    if(pWindow){
+        pRenderer=SDL_CreateRenderer(pWindow,index,flags);
+        return pRenderer;
+    }
+    return pRenderer;
+}
+
+//BUT:      Initialiser les textures pour chacune des images
+//ENTREE:   Le renderer et la liste des textures
+//SORTIE:   Les textures initialisées
+void initTexture(SDL_Renderer *pRenderer, listTexture *myTexture){
+    SDL_Surface *pSurface=NULL;
+    pSurface=IMG_Load("./assets/pisteur.png");
+    //Set image pisteur
+    if(!pSurface){
+        SDL_Log("Unable to set surface: %s", SDL_GetError());
+        //return 1;
+    }else{
+        myTexture->pTexturePisteur=SDL_CreateTextureFromSurface(pRenderer,pSurface);
+        SDL_FreeSurface(pSurface);
+
+        //Si pas de reference
+        if(!myTexture->pTexturePisteur){
+            SDL_Log("Unable to set texture: %s", SDL_GetError());
+            //return 1;
+        }
+    }
+    //Set image monstre
+    pSurface=IMG_Load("./assets/Monk_C.png");
+    if(!pSurface){
+        SDL_Log("Unable to set surface: %s", SDL_GetError());
+        //return 1;
+    }else{
+        myTexture->pTextureMonstre=SDL_CreateTextureFromSurface(pRenderer,pSurface);
+        SDL_FreeSurface(pSurface);
+
+        //Si pas de reference
+        if(!myTexture->pTextureMonstre){
+            SDL_Log("Unable to set texture: %s", SDL_GetError());
+            //return 1;
+        }
+    }
+    //Set image trace
+    pSurface=IMG_Load("./assets/Trace.png");
+    if(!pSurface){
+        SDL_Log("Unable to set surface: %s", SDL_GetError());
+        //return 1;
+    }else{
+        myTexture->pTextureTrace=SDL_CreateTextureFromSurface(pRenderer,pSurface);
+        SDL_FreeSurface(pSurface);
+
+        //Si pas de reference
+        if(!myTexture->pTextureTrace){
+            SDL_Log("Unable to set texture: %s", SDL_GetError());
+            //return 1;
+        }
+    }
+    //Set image sang
+    pSurface=IMG_Load("./assets/Blood.png");
+    if(!pSurface){
+        SDL_Log("Unable to set surface: %s", SDL_GetError());
+        //return 1;
+    }else{
+        myTexture->pTextureSang=SDL_CreateTextureFromSurface(pRenderer,pSurface);
+        SDL_FreeSurface(pSurface);
+
+        //Si pas de reference
+        if(!myTexture->pTextureSang){
+            SDL_Log("Unable to set texture: %s", SDL_GetError());
+            //return 1;
+        }
+    }
+
 }

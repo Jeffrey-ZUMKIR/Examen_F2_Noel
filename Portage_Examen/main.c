@@ -11,9 +11,27 @@
 #include "phaseMonstre.h"
 #include "trace.h"
 #include "endGame.h"
+#include "voidSDL.h"
+
+
+void handleEvents(gameState *state,phase *thePhase);
 
 int main(int argc,char *argv[])
 {
+    //Déclaration variable SDL
+    gameState state=stop;
+    phase thePhase=none;
+
+    //Mettre dans un type struct
+    renderer tRender;
+
+    listTexture myTexture;
+
+    tRender.pWindow=CreateWindow("La traque de Monk C",475,50,WIDTHTAB*sizeImage,HEIGHTAB*sizeImage,SDL_WINDOW_SHOWN,tRender.pWindow);
+    tRender.pRenderer=CreateRenderer(tRender.pWindow,-1,SDL_RENDERER_PRESENTVSYNC);
+
+    initTexture(tRender.pRenderer,&myTexture);
+
     //Déclaration des variables
     str_monstre monstre;
 
@@ -21,6 +39,7 @@ int main(int argc,char *argv[])
     int tabTraceVue[HEIGHTAB][WIDTHTAB];//Les traces qui ont été vue de manière temporaire
 
     char mapAffichage[HEIGHTAB][WIDTHTAB];
+    int good=0;
 
     //Explication
     printf("Monk C s'est echappe! Nous avons besoin de vous et de votre groupe de pisteur. Combien de pisteur possedez-vous?\n");
@@ -38,7 +57,7 @@ int main(int argc,char *argv[])
 
     AffichageInit(mapAffichage);
 
-    initPisteur(tabPisteur,mapAffichage,nbPisteur);
+    initPisteur(tabPisteur,mapAffichage,nbPisteur);//Ajout sur windows de l'image
 
     initMonstre(&monstre,mapAffichage,mapTraceMonstre);
 
@@ -47,32 +66,83 @@ int main(int argc,char *argv[])
     system("pause");
     system("cls");
 
-    int good=0;
+    state=play;
     do{
+        handleEvents(&state,&thePhase);
+        //Set Color
+        SDL_SetRenderDrawColor(tRender.pRenderer,205,92,92,SDL_ALPHA_OPAQUE);
+        //Clear Render
+        SDL_RenderClear(tRender.pRenderer);
+
         //Diminue la fraicheur des traces
         deleteTrace(mapTraceMonstre);
         //Phase Vision
-        phaseVision(tabPisteur,mapTraceMonstre,mapAffichage,nbPisteur,&monstre,tabTraceVue);
+        phaseVision(tabPisteur,mapTraceMonstre,mapAffichage,nbPisteur,&monstre,tabTraceVue);//Modification de l'image+ajout trace
+
+        //Set modification affichage
+        AffichImgSDL(tRender.pRenderer,myTexture,tabTraceVue,mapAffichage);
+        SDL_RenderPresent(tRender.pRenderer);
+
         //Phase Deplacement
-        phaseDeplacement(tabPisteur,nbPisteur,mapAffichage,tabTraceVue,monstre);
+        phaseDeplacement(tabPisteur,nbPisteur,mapAffichage,tabTraceVue,monstre);//Clear plus nouvelle emplacement
         //Reset les traces vues
         initMapTrace(tabTraceVue);
         //Phase monstre
         phaseMonstre(&monstre,mapTraceMonstre,tabPisteur,mapAffichage,nbPisteur,tabTraceVue);
         //Vérification de la condition de victoire
-        CheckEndGame(monstre,tabPisteur,&good,nbPisteur);
+        CheckEndGame(monstre,tabPisteur,&good,nbPisteur);//clear + ajout pisteur si vivant
+
+
         system("pause");
         //Clear screen
         system("cls");
-    }while(good==0);
+
+
     //Affichage de fin
+
+    //state=stop;
+    }while(state==play);
     if(good==1){
         printf("Vous avez terrasse le monstre!");
     }else if(good==2){
         printf("Le monstre a devore tout vos pisteurs!");
     }
+    if(tRender.pRenderer){
+        SDL_DestroyRenderer(tRender.pRenderer);
+    }
+
+    if(tRender.pWindow){
+      SDL_DestroyWindow(tRender.pWindow);
+    }
+
+    SDL_Quit();
 
 
 
     return 0;
+}
+
+
+void handleEvents(gameState *state,phase *thePhase){
+
+    SDL_Event event;
+
+    if(SDL_PollEvent(&event)){
+
+        /*switch (event.type){
+            case SDL_QUIT : *state=stop;break;
+            case SDL_KEYDOWN:
+                        switch(event.key.keysym.sym){
+                                case SDLK_LEFT:*control=left;break;
+                                case SDLK_RIGHT:*control=right;break;
+
+                        }break;
+
+
+
+        default:*control=none;break;
+        }*/
+
+    }
+
 }

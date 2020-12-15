@@ -57,6 +57,9 @@
 		<Unit filename="Monstre.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="SDL_Affich.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="Vision.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -73,6 +76,7 @@
 		<Unit filename="traceC.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="voidSDL.h" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>
