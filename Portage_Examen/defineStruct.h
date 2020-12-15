@@ -1,8 +1,8 @@
 #ifndef DEFINESTRUCT_H_INCLUDED
 #define DEFINESTRUCT_H_INCLUDED
 
-#define WIDTHTAB 30
-#define HEIGHTAB 15
+#define WIDTHTAB 31
+#define HEIGHTAB 16
 
 typedef struct coord{
     int x;
