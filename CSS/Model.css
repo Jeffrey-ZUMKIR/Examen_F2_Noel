@@ -80,7 +80,8 @@ footer {
   text-align: center;
 }
 
-.cpt p{
+p{
+  color: white;
   font-size: 16px;
   font-family: Arial, Helvetica, sans-serif;
   text-align: justify;
@@ -96,4 +97,9 @@ td, th{
   border:1px solid black;
   width: 10%;
   vertical-align: top;
+}
+
+h3{
+  color: white;
+  text-decoration: underline;
 }
