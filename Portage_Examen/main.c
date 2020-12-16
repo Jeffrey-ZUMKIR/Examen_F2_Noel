@@ -73,25 +73,8 @@ int main(int argc,char *argv[])
     do{
         handleEvents(&state,&thePhase,&pisteurActif,nbPisteur,mapAffichage,tabPisteur);
 
-        /*if(thePhase==init){
-            thePhase=vision;
-
-        }
-        if(pisteurActif==(nbPisteur-1)){
-            if(thePhase==deplacement){
-                printf("Debut vision\n");
-                thePhase=vision;
-            }else if(thePhase==vision){
-                printf("Debut deplacement\n");
-                thePhase=deplacement;
-            }
-            pisteurActif=-1;
-        }
-        pisteurActif+=1;*/
-
-
         //Set Color
-        SDL_SetRenderDrawColor(tRender.pRenderer,205,92,92,SDL_ALPHA_OPAQUE);
+        SDL_SetRenderDrawColor(tRender.pRenderer,1,145,0,SDL_ALPHA_OPAQUE);
         //Clear Render
         SDL_RenderClear(tRender.pRenderer);
         //Phase Vision
@@ -100,36 +83,26 @@ int main(int argc,char *argv[])
                 //Diminue la fraicheur des traces
                 deleteTrace(mapTraceMonstre);
             }
-            printf("C'est le tour du pisteur %d\n", pisteurActif);
+            printf("C'est le tour de vision du pisteur %d\n", pisteurActif+1);
             doVision(tabPisteur[pisteurActif],mapTraceMonstre,mapAffichage,&monstre, tabTraceVue);
         }
-
+        //Phase déplacement
         if(thePhase==deplacement){
             if(pisteurActif==0){
                 initMapTrace(tabTraceVue);
             }
-            printf("C'est le tour de deplacement du pisteur %d\n", pisteurActif);
+            printf("C'est le tour de deplacement du pisteur %d\n", pisteurActif+1);
             doDeplacement(&tabPisteur[pisteurActif],mapAffichage);
+            //Phase monstre
             if(pisteurActif==nbPisteur-1){
                 phaseMonstre(&monstre,mapTraceMonstre,tabPisteur,mapAffichage,nbPisteur,tabTraceVue);
             }
         }
         //Vérification de la condition de victoire
-        //CheckEndGame(monstre,tabPisteur,&good,nbPisteur);
+        CheckEndGame(monstre,tabPisteur,&good,nbPisteur);
 
-
-
-        //Phase Deplacement
-        //Clear plus nouvelle emplacement
-        //Reset les traces vues
-
-        //Phase monstre
-
-
-        //clear + ajout pisteur si vivant
 
         //Set modification affichage
-
         AffichImgSDL(tRender.pRenderer,myTexture,tabTraceVue,mapAffichage);
         SDL_RenderPresent(tRender.pRenderer);
 
@@ -140,9 +113,6 @@ int main(int argc,char *argv[])
         if(good!=0){
             state=stop;
         }
-
-
-    //Affichage de fin
 
     }while(state==play);
 
@@ -171,21 +141,16 @@ void handleEvents(gameState *state,phase *thePhase,int *pisteurActif, int nbPist
 
     SDL_Event event;
     fflush(stdin);
-    printf("CC\n");
     if(SDL_PollEvent(&event)){
-        printf("Le pisteur actif %d\n", *pisteurActif);
-
+        //Vérification si on arrive en phase init, afficher une première fois
         if(*thePhase==init){
             *thePhase=vision;
-
         }
-
+        //Check entre passage phase de vision et phase de déplacement
         if(*pisteurActif==(nbPisteur-1)){
             if(*thePhase==deplacement){
-                printf("Debut vision\n");
                 *thePhase=vision;
             }else if(*thePhase==vision){
-                printf("Debut deplacement\n");
                 *thePhase=deplacement;
             }
             *pisteurActif=-1;
@@ -193,7 +158,7 @@ void handleEvents(gameState *state,phase *thePhase,int *pisteurActif, int nbPist
         *pisteurActif+=1;
 
     }
-    SDL_FlushEvent(SDL_WINDOWEVENT);
+    //SDL_FlushEvent(SDL_WINDOWEVENT);
 
 
 

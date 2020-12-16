@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1608043372 source:d:\home\documents\ludus f2\examen\noel\examen_f2_noel\portage_examen\main.c
+1608125174 source:d:\home\documents\ludus f2\examen\noel\examen_f2_noel\portage_examen\main.c
 	<stdio.h>
 	<stdlib.h>
 	<SDL2/SDL.h>
@@ -377,10 +377,10 @@
 1607969358 d:\home\documents\ludus f2\examen\noel\examen_f2_noel\portage_examen\phaseinit.h
 	"defineStruct.h"
 
-1608028464 d:\home\documents\ludus f2\examen\noel\examen_f2_noel\portage_examen\definestruct.h
+1608124408 d:\home\documents\ludus f2\examen\noel\examen_f2_noel\portage_examen\definestruct.h
 	<SDL2/SDL.h>
 
-1607969744 source:d:\home\documents\ludus f2\examen\noel\examen_f2_noel\portage_examen\initialisation.c
+1608124408 source:d:\home\documents\ludus f2\examen\noel\examen_f2_noel\portage_examen\initialisation.c
 	<stdio.h>
 	<stdlib.h>
 	<time.h>
@@ -401,7 +401,7 @@
 1607453315 d:\home\documents\ludus f2\examen\noel\examen_f2_noel\portage_examen\phasevision.h
 	"defineStruct.h"
 
-1608036204 source:d:\home\documents\ludus f2\examen\noel\examen_f2_noel\portage_examen\vision.c
+1608053347 source:d:\home\documents\ludus f2\examen\noel\examen_f2_noel\portage_examen\vision.c
 	<stdio.h>
 	<stdlib.h>
 	<ctype.h>
@@ -453,7 +453,7 @@
 1607969152 d:\home\documents\ludus f2\examen\noel\examen_f2_noel\portage_examen\voidsdl.h
 	"defineStruct.h"
 
-1607969137 source:d:\home\documents\ludus f2\examen\noel\examen_f2_noel\portage_examen\sdl_affich.c
+1608125289 source:d:\home\documents\ludus f2\examen\noel\examen_f2_noel\portage_examen\sdl_affich.c
 	<stdio.h>
 	<stdlib.h>
 	<SDL2/SDL.h>

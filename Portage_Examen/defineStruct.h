@@ -29,6 +29,7 @@ typedef struct listTexture{
     SDL_Texture *pTextureMonstre;
     SDL_Texture *pTextureTrace;
     SDL_Texture *pTextureSang;
+    SDL_Texture *pTextureArbre;
 }listTexture;
 
 typedef struct renderer{

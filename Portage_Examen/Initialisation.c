@@ -257,5 +257,20 @@ void initTexture(SDL_Renderer *pRenderer, listTexture *myTexture){
             //return 1;
         }
     }
+    //Set image arbre
+    pSurface=IMG_Load("./assets/Arbre.png");
+    if(!pSurface){
+        SDL_Log("Unable to set surface: %s", SDL_GetError());
+        //return 1;
+    }else{
+        myTexture->pTextureArbre=SDL_CreateTextureFromSurface(pRenderer,pSurface);
+        SDL_FreeSurface(pSurface);
+
+        //Si pas de reference
+        if(!myTexture->pTextureArbre){
+            SDL_Log("Unable to set texture: %s", SDL_GetError());
+            //return 1;
+        }
+    }
 
 }
