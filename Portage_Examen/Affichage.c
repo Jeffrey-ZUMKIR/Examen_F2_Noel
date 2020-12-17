@@ -42,37 +42,3 @@ void AffichageInit(char tab[HEIGHTAB][WIDTHTAB]){
 
 
 }
-
-//BUT:      Afficher la map de jeu
-//ENTREE:   Le tab des traces du monstres et le tab affichage
-//SORTIE:   Affichage de la map, des pisteurs et des traces trouvés
-void AffichageTrace(int tabTrace[HEIGHTAB][WIDTHTAB],char tabAff[HEIGHTAB][WIDTHTAB]){
-    /*int i=0;
-    int j=0;
-    for(i=0;i<HEIGHTAB;i++){
-        for(j=0;j<WIDTHTAB;j++){
-            if(tabTrace[i][j]==-1){
-                printf("%c ",'*');
-            }else if(tabAff[i][j]=='P'){
-                printf("%c ",'P');
-            }else if(tabAff[i][j]=='!'){
-                printf("%c ",'!');
-            }else if(tabAff[i][j]=='?'){
-                printf("%c ",'?');
-            }else if(tabTrace[i][j]=='&'){
-                printf("%c ",'&');
-            }else if(tabTrace[i][j]==16){
-                printf("%c ",'M');
-            }else if(tabTrace[i][j]>0){
-                if(tabTrace[i][j]<10){
-                    printf("%d ",tabTrace[i][j]);
-                }else{
-                    printf("%d",tabTrace[i][j]);
-                }
-            }else{
-                printf("  ");
-            }
-        }
-        printf("\n");
-    }*/
-}

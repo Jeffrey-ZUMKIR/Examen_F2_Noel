@@ -9,32 +9,21 @@
 #define MAXSHOUT 100
 #define MINSHOOT 1
 
-//BUT:      Enclencher la vision de chaque pisteur
-//ENTREE:   La liste de pisteur, les tableaux des traces, le tableau d'affichage et la variable du monstre
-//SORTIE:   Phase de vision terminé
-void phaseVision(struct str_pisteur tabpisteur[], int tabTraceMonstre[HEIGHTAB][WIDTHTAB], char tabAffiche[HEIGHTAB][WIDTHTAB], int nbPisteur, str_monstre *monstre, int tabTraceVue[HEIGHTAB][WIDTHTAB]){
-    //Répéter l'action de vue pour chaque pisteur
-    for(int i=0;i<nbPisteur;i++){
-        doVision(tabpisteur[i],tabTraceMonstre,tabAffiche,monstre, tabTraceVue);
-    }
-}
 
 //BUT:      Checker ce que voie le pisteur
 //ENTREE:   Le pisteur, les tableaux des traces, le tableau d'affichage et la variable du monstre
 //SORTIE:   Les zones avec des traces affichés
-void doVision(str_pisteur pisteur, int tabTraceMonstre[HEIGHTAB][WIDTHTAB], char tabAffiche[HEIGHTAB][WIDTHTAB], str_monstre *monstre,int tabTraceVue[HEIGHTAB][WIDTHTAB]){
+void doVision(str_pisteur pisteur, int tabTraceMonstre[HEIGHTAB][WIDTHTAB], char tabAffiche[HEIGHTAB][WIDTHTAB], str_monstre *monstre,int tabTraceVue[HEIGHTAB][WIDTHTAB],int *foundMonst){
     if(pisteur.vivant==1){
         int x=pisteur.pos.x;
         int y=pisteur.pos.y;
         int nb=1;
-        int foundMonst=0;
 
         int i=0;
         int j=0;
 
         //Indiquer quel pisteur voie
         tabAffiche[y][x]='!';
-        //AffichageTrace(tabTraceVue,tabAff);
 
         //Vérification de chaque case autour du pisteur
         for(i=-1;i<2;i++){
@@ -43,7 +32,7 @@ void doVision(str_pisteur pisteur, int tabTraceMonstre[HEIGHTAB][WIDTHTAB], char
                 if(tabTraceMonstre[y+i][x+j]==16){
                     printf("Le monstre se trouve en case numero %d! ",nb);
                     tabTraceVue[y+i][x+j]=16;
-                    foundMonst=1;
+                    *foundMonst=1;
                 }//Détection si il y a des traces environnantes
                 else if(tabTraceMonstre[y+i][x+j]>0){
                     printf("Trace en %d de valeur %d. ",nb,tabTraceMonstre[y+i][x+j]);
@@ -67,22 +56,9 @@ void doVision(str_pisteur pisteur, int tabTraceMonstre[HEIGHTAB][WIDTHTAB], char
         printf("%d ",8);
         printf("%d\n",9);
 
-        AffichageTrace(tabTraceVue,tabAffiche);
-
-        //Si le monstre est là, enclencher le tir
-        if(foundMonst==1){
-            Tirer(monstre);
-        }
 
         //Remettre le pisteur en défaut
         tabAffiche[y][x]='P';
-
-        //monstre->PV=2;
-        //printf("PV du monstre%d",monstre.PV);
-
-
-
-
     }
 }
 

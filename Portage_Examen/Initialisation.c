@@ -141,8 +141,6 @@ void initMonstre(str_monstre *monstre,char tab[HEIGHTAB][WIDTHTAB],int mapTraceM
     do{
         x=(rand()%(MaxX + 1 - Min))+Min;
         y=(rand()%(MaxY + 1 - Min))+Min;
-        //x=6;
-        //y=6;
 
         good=1;
         for(int i=-1;i<2;i++){

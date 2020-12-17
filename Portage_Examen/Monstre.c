@@ -93,7 +93,7 @@ void phaseMonstre(str_monstre *monstre, int tabTraceM[HEIGHTAB][WIDTHTAB], struc
                 //Le pisteur présent sur cette case passe sa vie à 0
                 for(i=0;i<nbPisteur;i++){
                     if(tabPisteur[i].pos.x==xgoto && tabPisteur[i].pos.y==ygoto){
-                        printf("Le monstre a devore le pisteur numero %d!\n",i);
+                        printf("Le monstre a devore le pisteur numero %d!\n",i+1);
                         tabPisteur[i].vivant=0;
                     }
                 }

@@ -5,30 +5,6 @@
 #include "Affich.h"
 #include "phaseDeplacement.h"
 
-//BUT:      Enclencher la déplacement de chaque pisteur
-//ENTREE:   La liste des pisteurs, le nombre de pisteur, la map à afficher, les traces appercus par les pisteurs
-//SORTIE:   Phase de déplacement de pisteur terminé
-void phaseDeplacement(str_pisteur tabPisteur[],int nbPisteur, char mapAffiche[HEIGHTAB][WIDTHTAB],int tabTraceVue[HEIGHTAB][WIDTHTAB],str_monstre monstre){
-    int i=0;
-    if(monstre.PV>0){
-        for(i=0;i<nbPisteur;i++){
-            if(tabPisteur[i].vivant==1){
-                //Indiquer quel pisteur veut se déplacer
-                mapAffiche[tabPisteur[i].pos.y][tabPisteur[i].pos.x]='?';
-                //Afficher la map
-                AffichageTrace(tabTraceVue,mapAffiche);
-                //Déplacer le pisteur
-                doDeplacement(&tabPisteur[i],mapAffiche);
-                //Afficher la modification
-                AffichageTrace(tabTraceVue,mapAffiche);
-                system("pause");
-                system("cls");
-            }
-        }
-    }
-
-
-}
 
 //BUT:      Faire déplacer un pisteur
 //ENTREE:   Le pisteur, la map à afficher

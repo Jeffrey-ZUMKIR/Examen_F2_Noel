@@ -31,12 +31,6 @@ void AffichImgSDL(SDL_Renderer *pRenderer,listTexture myTexture,int tabTrace[HEI
                 rectDest.x=j*sizeImage;
                 rectDest.y=i*sizeImage;
                 SDL_RenderCopy(pRenderer,myTexture.pTexturePisteur,&rectSource,&rectDest);
-            }else if(tabAff[i][j]=='?'){
-                //printf("%c ",'?');
-                rectSource.x=50;
-                rectDest.x=j*sizeImage;
-                rectDest.y=i*sizeImage;
-                SDL_RenderCopy(pRenderer,myTexture.pTexturePisteur,&rectSource,&rectDest);
             }else if(tabTrace[i][j]=='&'){
                 //printf("%c ",'&');
                 rectSource.x=0;
