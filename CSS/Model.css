@@ -99,6 +99,14 @@ td, th{
   vertical-align: top;
 }
 
+th{
+  background-color: #005932;
+}
+
+td{
+  background-color: #006D3D;
+}
+
 h3{
   color: white;
   text-decoration: underline;
