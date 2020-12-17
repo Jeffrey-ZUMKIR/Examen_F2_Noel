@@ -72,6 +72,20 @@ int main(int argc,char *argv[])
     state=play;
     do{
         handleEvents(&state,&thePhase,&pisteurActif,nbPisteur,mapAffichage,tabPisteur);
+        //Vérification si on arrive en phase init, afficher une première fois
+        if(thePhase==init){
+            thePhase=vision;
+        }
+        //Check entre passage phase de vision et phase de déplacement
+        if(pisteurActif==(nbPisteur-1)){
+            if(thePhase==deplacement){
+                thePhase=vision;
+            }else if(thePhase==vision){
+                thePhase=deplacement;
+            }
+            pisteurActif=-1;
+        }
+        pisteurActif+=1;
 
         //Set Color
         SDL_SetRenderDrawColor(tRender.pRenderer,1,145,0,SDL_ALPHA_OPAQUE);
@@ -142,7 +156,7 @@ void handleEvents(gameState *state,phase *thePhase,int *pisteurActif, int nbPist
     SDL_Event event;
     fflush(stdin);
     if(SDL_PollEvent(&event)){
-        //Vérification si on arrive en phase init, afficher une première fois
+        /*//Vérification si on arrive en phase init, afficher une première fois
         if(*thePhase==init){
             *thePhase=vision;
         }
@@ -155,7 +169,15 @@ void handleEvents(gameState *state,phase *thePhase,int *pisteurActif, int nbPist
             }
             *pisteurActif=-1;
         }
-        *pisteurActif+=1;
+        *pisteurActif+=1;*/
+
+        switch(event.type){
+            case SDL_QUIT:
+                *state=stop;
+                break;
+            default:
+                break;
+        }
 
     }
     //SDL_FlushEvent(SDL_WINDOWEVENT);
