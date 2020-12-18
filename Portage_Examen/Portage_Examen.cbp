@@ -13,17 +13,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
-					<Add directory="../../../../Algo/SDL2-2.0.12/x86_64-w64-mingw32/include" />
-					<Add directory="../../../../Algo/SDL2_image-2.0.5/x86_64-w64-mingw32/include" />
 				</Compiler>
-				<Linker>
-					<Add option="-lmingw32" />
-					<Add library="../../../../Algo/SDL2-2.0.12/x86_64-w64-mingw32/lib/libSDL2main.a" />
-					<Add library="../../../../Algo/SDL2-2.0.12/x86_64-w64-mingw32/lib/libSDL2.dll.a" />
-					<Add library="../../../../Algo/SDL2_image-2.0.5/x86_64-w64-mingw32/lib/libSDL2_image.dll.a" />
-					<Add directory="../../../../Algo/SDL2-2.0.12/x86_64-w64-mingw32/lib" />
-					<Add directory="../../../../Algo/SDL2_image-2.0.5/x86_64-w64-mingw32/lib" />
-				</Linker>
 			</Target>
 			<Target title="Release">
 				<Option output="bin/Release/Portage_Examen" prefix_auto="1" extension_auto="1" />
